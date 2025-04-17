@@ -9,6 +9,7 @@ class Service extends Model
 {
     protected $fillable = ['id_services',
                         'name',
+                        'status',
                         'image'];
 
     public function service(): HasMany

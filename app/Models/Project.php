@@ -13,6 +13,7 @@ class Project extends Model
                         'year',
                         'address',
                         'service_id',
+                        'status',
                         'image_1',
                         'image_2',
                         'image_3',

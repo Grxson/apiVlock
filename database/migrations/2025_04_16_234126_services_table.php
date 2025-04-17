@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('services', function (Blueprint $table) {            
             $table->bigIncrements('id_services');
             $table->string('name');
+            $table->string('status');
             $table->string('image');
 
             $table->timestamps();
