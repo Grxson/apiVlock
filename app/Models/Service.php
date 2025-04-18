@@ -12,7 +12,7 @@ class Service extends Model
                         'status',
                         'image'];
 
-    public function service(): HasMany
+    public function projects(): HasMany
     {
         return $this->hasMany(Project::class);
     }

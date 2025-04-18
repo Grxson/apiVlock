@@ -8,7 +8,8 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
-
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ServiceController;
 
 Route::middleware(['auth:sanctum'])->get('/profile', function (Request $request) {
     return $request->user();
@@ -41,3 +42,6 @@ Route::post('/email/verification-notification', [EmailVerificationNotificationCo
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
 ->middleware('auth:sanctum') // auth:sanctum por que usamos sanctum para la autenticación por el token
 ->name('logout');
+
+Route::apiResource('/proyecto', ProjectController::class);
+Route::apiResource('/servicio', ServiceController::class);
