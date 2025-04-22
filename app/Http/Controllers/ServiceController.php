@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreServiceRequest;
+use App\Http\Requests\UpdateServiceRequest;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use Exception;
@@ -52,22 +54,10 @@ class ServiceController extends Controller
         }
     }
 
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
         try {
-            $validated = $request->validate([
-                'name' => 'required|string|max:255',
-                'image' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
-            ], [
-                'name.required' => 'El nombre es obligatorio.',
-                'name.string' => 'El nombre debe ser una cadena de texto.',
-                'name.max' => 'El nombre no puede tener más de 255 caracteres.',
-            
-                'image.required' => 'La imagen es obligatoria.',
-                'image.image' => 'El archivo debe ser una imagen.',
-                'image.mimes' => 'La imagen debe ser de tipo: jpeg, png, jpg o svg.',
-                'image.max' => 'La imagen no debe pesar más de 2MB.',
-            ]);
+            $validated = $request->validated();
 
             $service = Service::create($validated);
 
@@ -87,16 +77,13 @@ class ServiceController extends Controller
         }
     }
 
-    public function update($id, Request $request)
+    public function update($id, UpdateServiceRequest $request)
     {
         try {
             $service = Service::findOrFail($id);
 
-            $validated = $request->validate([
-                'name' => 'string|max:255',
-                'image' => 'image|mimes:jpeg,png,jpg,svg|max:2048',
-            ]);
-
+            $validated = $request->validated();
+            
             $service->update($validated);
 
             return response()->json([
